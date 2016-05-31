@@ -1,4 +1,4 @@
-= Library: Linux OS provisioner (`sys-provisioner`)
+= Library: Linux OS provisioning (`sys-provisioning`)
 :caution-caption: ☡ CAUTION
 :important-caption: ❗ IMPORTANT
 :note-caption: 🛈 NOTE
