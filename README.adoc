@@ -1,0 +1,83 @@
+= Library: Linux OS provisioner (`sys-provisioner`)
+:caution-caption: ☡ CAUTION
+:important-caption: ❗ IMPORTANT
+:note-caption: 🛈 NOTE
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:source-highlighter: pygments
+:tip-caption: 💡 TIP
+:toc-placement: preamble
+:toc:
+:warning-caption: ⚠ WARNING
+
+You can use this project as an absolutely minimal and simple library for Python provisioning code for e.g. container images and containers.
+For example, you can use it
+
+* to mutate the state of a container (e.g., make filesystem changes related to mutable data) without using shell scripts, e.g. prior to starting a daemon process;
+* to create a container image by mutating a container derived from a base image (e.g., a https://www.packer.io/[Packer]-based workflow).
+
+
+== Properties
+
+This package lays foundations for:
+
+. logging;
+. very easy, concise and functional subprocess execution (e.g., shell commands);
+. exception handling/debugging.
+
+
+=== Advantages
+
+By writing provisioning code depending on this library, you and your team need minimal Python/system programming capability to automate image and container provisioning.
+Your provisioning code will be minimalistic and flexible, but allow you to have the reliable yet complex provisioning process that may be required for real-world, possibly legacy deployments (e.g., https://en.wikipedia.org/wiki/LAMP_(software_bundle)[LAMP] stacks).
+
+Other solutions are less attractive depending on your criteria.
+
+. Domain-specific languages and frameworks:
+.. durability questionable (e.g., major incompatible CM frameworks wax and wane in popularity).
+.. needlessly non-standard (e.g., Dockerfiles).
+. Shell scripting:
+.. unreliable: defects arise from subtle platform differences;
+.. less functional: no API but set of CLI utilities;
+.. requires scarce competence and time investment to do well.
+. Systems programming (e.g., C, C++, Go, Rust) languages: require scarce competence and possibly time investment to do well.
+
+=== Disadvantages
+
+By using this package your provisioning code will depend on Python 3, which is to some degree heavy, tricky to work with and slow compared to e.g. a  native code provisioning executable.
+
+== Dependencies
+
+[options="header"]
+|===
+
+| Conditions | Type | Name (URL) | Version constraint
+
+| by necessity
+| software
+| https://www.python.org/[CPython]
+| >=3.5
+
+|===
+
+== To install the package
+
+Currently, this package does not have https://pypi.python.org/pypi/setuptools[`setuptools`] packaging.
+This package is normally installed by copying the link:provisioning/[`provisioning`] package into the relevant CPython site directory (e.g., `/usr/lib/python3.5/site-packages/`).
+
+
+== Example
+
+[source,python3]
+----
+#!/usr/bin/python3 -B
+
+from provisioning import provision, sh_cmd
+
+if __name__ == '__main__':
+    with provision():
+        print('This block contains your provisioning code. '
+              'A log has been created at /build.log. ')
+----
