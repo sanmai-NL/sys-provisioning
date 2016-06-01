@@ -35,7 +35,8 @@ def provision(debug: bool=True, log_file_path: str='/build.log'):
         if debug:
             print_exc()
             error(
-                'Exception occurred. Sleeping to help debugging inside container. ')
+                'Caught the above exception. '
+                'Sleeping now, to help debugging inside container. ')
             sleep(100000)
         else:
             raise
