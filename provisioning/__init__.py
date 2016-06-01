@@ -13,13 +13,13 @@ def sh_cmd(*args, check: bool=True, shell: bool=True, stderr=PIPE, **kwargs):
 
 
 @contextmanager
-def provision(debug: bool=True):
+def provision(debug: bool=True, log_file_path: str='/build.log'):
     try:
         try:
             basicConfig(
                 level=DEBUG,
                 format='%(asctime)-15s %(funcName)s %(levelname)s %(message)s',
-                filename='/build.log')
+                filename=log_file_path)
             console = StreamHandler()
             console.setLevel(INFO)
             getLogger().addHandler(console)
