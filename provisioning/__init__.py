@@ -32,8 +32,8 @@ def provision(debug: bool=True, log_file_path: str='/build.log'):
                   exc.stderr.decode(encoding=getpreferredencoding(False)))
             raise
     except:
-        print_exc()
         if debug:
+            print_exc()
             error(
                 'Exception occurred. Sleeping to help debugging inside container. ')
             sleep(100000)
